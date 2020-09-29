@@ -93,7 +93,13 @@ sudo apt install -y --no-install-recommends --no-install-suggests libsdl1.2debia
 sudo pip3 install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
 
 # Configure compile and install GRASS GIS
-git clone --depth=1 --branch $GRASS_RELEASE https://github.com/OSGeo/grass.git grass-${GRASS_RELEASE}
+if [ -d grass-${GRASS_RELEASE} ]
+then
+	echo "exists"
+else
+	git clone --depth=1 --branch $GRASS_RELEASE https://github.com/OSGeo/grass.git grass-${GRASS_RELEASE}
+fi
+
 GRASS_PYTHON=/usr/bin/python3
 cd grass-${GRASS_RELEASE}
 ./configure \
@@ -122,7 +128,12 @@ cd ..
 
 # PCL
 sudo apt-get install -y --no-install-recommends --no-install-suggests libeigen3-dev libflann-dev
-git clone --depth=1 --branch pcl-${PCL_RELEASE} https://github.com/PointCloudLibrary/pcl.git pcl-${PCL_RELEASE}
+if [ -d pcl-${PCL_RELEASE} ]
+then
+	echo "exists"
+else
+	git clone --depth=1 --branch pcl-${PCL_RELEASE} https://github.com/PointCloudLibrary/pcl.git pcl-${PCL_RELEASE}
+fi
 cd pcl-${PCL_RELEASE}
 mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && \
     make -j$NUMTHREADS && \
@@ -130,7 +141,13 @@ mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && \
 cd ../..
 
 # r.in.kinect
-git clone --single-branch --branch v${RINKINECT_RELEASE} https://github.com/tangible-landscape/r.in.kinect.git r.in.kinect.k4a
+if [ -d v${RINKINECT_RELEASE} ]
+then
+	echo "exists"
+else
+	git clone --single-branch --branch v${RINKINECT_RELEASE} https://github.com/tangible-landscape/r.in.kinect.git r.in.kinect.k4a
+fi
+
 cd r.in.kinect.k4a
 make MODULE_TOPDIR=../grass-${GRASS_RELEASE} && sudo make install MODULE_TOPDIR=../grass-${GRASS_RELEASE}
 cd ..
