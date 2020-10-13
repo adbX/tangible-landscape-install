@@ -74,6 +74,8 @@ sudo apt-get update && sudo apt-get upgrade -y && \
     wget \
     zip \
     zlib1g-dev \
+    watchdog \
+    libsdl2-2.0 \
     mesa-common-dev libglu1-mesa-dev \
     libpdal-dev 
 
