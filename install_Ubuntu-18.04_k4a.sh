@@ -90,11 +90,14 @@ sudo mkdir -p /etc/udev/rules.d
 sudo wget https://raw.githubusercontent.com/microsoft/Azure-Kinect-Sensor-SDK/develop/scripts/99-k4a.rules -O /etc/udev/rules.d/99-k4a.rules
 
 # GRASS
-# download wxPython4 binary
-sudo apt install -y --no-install-recommends --no-install-suggests libsdl1.2debian
-sudo pip3 install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
-
+# download and install (wxPython4.0.7 post2)(for python 3.6) binary
+sudo wget http://security.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1_amd64.deb
+sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1_amd64.deb
+sudo apt install -y --no-install-recommends --no-install-suggests libsdl1.2-dev
+sudo pip3 install -U -f \
+    -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-16.04/wxPython-4.0.7.post2-cp36-cp36m-linux_x86_64.whl
 # Configure compile and install GRASS GIS
+
 if [ -d grass-${GRASS_RELEASE} ]
 then
 	echo "exists"
